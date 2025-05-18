@@ -1,3 +1,6 @@
 spring:
     application:
         name: spring-practice-webclient
+
+server:
+    port: 9090
