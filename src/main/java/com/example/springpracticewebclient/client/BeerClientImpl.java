@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class BeerClientImpl implements BeerClient {
 	
 	private final WebClient webClient;
 	public static final String BEER_PATH = "/api/v3/beer";
+	private static final String BEER_PATH_ID = BEER_PATH + "/{id}";
 	
 	public BeerClientImpl(WebClient.Builder webClientBuilder) {
 		this.webClient = webClientBuilder.build();
@@ -48,6 +50,16 @@ public class BeerClientImpl implements BeerClient {
 			       .uri(BEER_PATH)
 			       .retrieve()
 			       .bodyToFlux(BeerDTO.class);
+	}
+	
+	@Override
+	public Mono<BeerDTO> getBeerById(String id) {
+		return webClient.get()
+			       .uri(
+				       uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(id)
+			       )
+			       .retrieve()
+			       .bodyToMono(BeerDTO.class);
 	}
 	
 }
