@@ -1,5 +1,6 @@
 package com.example.springpracticewebclient.client;
 
+import com.example.springpracticewebclient.model.BeerDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import reactor.core.publisher.Flux;
 
@@ -12,4 +13,6 @@ public interface BeerClient {
 	Flux<Map> listBeersWithMap();
 	
 	Flux<JsonNode> listBeersWithJsonNode();
+	
+	Flux<BeerDTO> listBeersWithDTO();
 }
