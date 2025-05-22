@@ -77,4 +77,16 @@ class BeerClientImplTest {
 		await().untilTrue(atomicBoolean);
 	}
 	
+	@Test
+	void test_get_by_style() {
+		var atomicBoolean = new AtomicBoolean(false);
+		
+		beerClient.getBeerByStyle("IPA").subscribe(response -> {
+			System.out.println(response.toString());
+			atomicBoolean.set(true);
+		});
+		
+		await().untilTrue(atomicBoolean);
+	}
+	
 }
