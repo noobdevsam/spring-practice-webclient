@@ -106,7 +106,7 @@ public class BeerClientImpl implements BeerClient {
 	
 	@Override
 	public Mono<BeerDTO> patchBeer(BeerDTO beerDTO) {
-		return webClient.put()
+		return webClient.patch()
 			       .uri(
 				       uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(beerDTO.id())
 			       )
