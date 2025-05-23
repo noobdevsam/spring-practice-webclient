@@ -118,4 +118,13 @@ public class BeerClientImpl implements BeerClient {
 			       );
 	}
 	
+	@Override
+	public Mono<Void> deleteBeer(BeerDTO beerDTO) {
+		return webClient.delete()
+			       .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(beerDTO.id()))
+			       .retrieve()
+			       .toBodilessEntity()
+			       .then();
+	}
+	
 }
