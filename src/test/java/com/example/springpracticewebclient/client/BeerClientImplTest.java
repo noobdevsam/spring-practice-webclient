@@ -125,4 +125,24 @@ class BeerClientImplTest {
 		await().untilTrue(atomicBoolean);
 	}
 	
+	@Test
+	void test_patch_beer() {
+		var atomicBoolean = new AtomicBoolean(false);
+		
+		beerClient.listBeersWithDTO()
+			.next()
+			.flatMap(
+				beerDTO -> {
+					System.out.println("Getting beer with id: " + beerDTO.id());
+					return beerClient.patchBeer(new BeerDTO(beerDTO.id(), "Updated again Beer again"));
+				}
+			)
+			.subscribe(beerDTO -> {
+				System.out.println(beerDTO.toString());
+				atomicBoolean.set(true);
+			});
+		
+		await().untilTrue(atomicBoolean);
+	}
+	
 }
