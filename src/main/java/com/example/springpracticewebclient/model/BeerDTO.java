@@ -13,5 +13,9 @@ public record BeerDTO(
 	LocalDateTime createdDate,
 	LocalDateTime lastModifiedDate
 ) {
+	
+	public BeerDTO(String beerName, String beerStyle, String quantityOnHand, String upc, String price) {
+		this(null, null, beerName, beerStyle, upc, price, quantityOnHand, null, null);
+	}
 
 }
