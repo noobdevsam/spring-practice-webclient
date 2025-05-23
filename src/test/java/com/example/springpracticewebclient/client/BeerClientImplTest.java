@@ -1,5 +1,6 @@
 package com.example.springpracticewebclient.client;
 
+import com.example.springpracticewebclient.model.BeerDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -85,6 +86,21 @@ class BeerClientImplTest {
 			System.out.println(response.toString());
 			atomicBoolean.set(true);
 		});
+		
+		await().untilTrue(atomicBoolean);
+	}
+	
+	@Test
+	void test_create_beer() {
+		var atomicBoolean = new AtomicBoolean(false);
+		
+		beerClient.createBeer(
+				new BeerDTO("Test Beer", "Test Brewery", "54654354", "123456789", "12.99")
+			)
+			.subscribe(response -> {
+				System.out.println(response.toString());
+				atomicBoolean.set(true);
+			});
 		
 		await().untilTrue(atomicBoolean);
 	}
