@@ -17,7 +17,7 @@ spring:
                             - message.read
                             - message.write
                         authorization-grant-type: client_credentials
-                        provider: springauth
+                        provider: springauth # reference to the provider above line 8
 
 server:
     port: 8083
